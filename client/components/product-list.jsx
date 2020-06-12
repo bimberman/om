@@ -24,7 +24,15 @@ export default class ProductList extends React.Component {
 
   render() {
     const productListItems = this.state.products.map((product, index) => {
-      return <ProductListItem key={index}/>;
+      return (
+        <ProductListItem
+          key={index}
+          name={product.name}
+          price={product.price}
+          shortDescription={product.shortDescription}
+          image={product.image}>
+        </ProductListItem>
+      );
     });
     return (
       <div className="product-list row d-flex justify-content-center">

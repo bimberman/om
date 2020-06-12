@@ -20,7 +20,6 @@ app.get('/api/health-check', (req, res, next) => {
 });
 
 app.get('/api/products', (req, res, next) => {
-
   const sqlQuery = `select "productId",
                            "name",
                            "price",
@@ -30,6 +29,21 @@ app.get('/api/products', (req, res, next) => {
 
   db.query(sqlQuery)
     .then(result => res.json(result.rows))
+    .catch(err => next(err));
+});
+
+app.get('/api/products/:productId', (req, res, next) => {
+  const sqlQuery = `select *
+                    from "products"
+                    where "productId" = '${req.params.productId}'`;
+
+  db.query(sqlQuery)
+    .then(result => {
+      if (!result.rowCount) {
+        next(new ClientError(`There are no records matching id: ${req.params.productId}`, 404));
+      }
+      res.json(result.rows[0]);
+    })
     .catch(err => next(err));
 });
 

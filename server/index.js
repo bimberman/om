@@ -35,12 +35,14 @@ app.get('/api/products', (req, res, next) => {
 app.get('/api/products/:productId', (req, res, next) => {
   const sqlQuery = `select *
                     from "products"
-                    where "productId" = '${req.params.productId}'`;
+                    where "productId" = $1`;
+  const value = [req.params.productId];
 
-  db.query(sqlQuery)
+  db.query(sqlQuery, value)
     .then(result => {
       if (!result.rowCount) {
         next(new ClientError(`There are no records matching id: ${req.params.productId}`, 404));
+        return;
       }
       res.json(result.rows[0]);
     })

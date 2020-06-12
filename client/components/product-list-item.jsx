@@ -2,15 +2,26 @@ import React from 'react';
 
 export default class ProductListItem extends React.Component {
 
+  constructor(props) {
+    super(props);
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick() {
+    this.props.setView('details', { productId: this.props.productId });
+  }
+
   render() {
     const { name, price, image } = this.props;
     let shortDescription = this.props.shortDescription;
-
     if (shortDescription.length > 110) {
       shortDescription = shortDescription.substr(0, 109).concat(String.fromCharCode(8230));
     }
     return (
-      <div className="container card col-3 m-3" style={{ height: '60vh' }}>
+      <div
+        className="container card col-3 m-3"
+        style={{ height: '60vh' }}
+        onClick={this.handleClick}>
         <img
           src={image}
           className="card-img-top img-icon img-thumbnail mt-3"

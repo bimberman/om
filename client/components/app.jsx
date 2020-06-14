@@ -3,6 +3,7 @@ import Header from './header';
 import ProductList from './product-list';
 import ProductDetails from './product-details';
 import CartSummary from './cart-summary';
+import CheckoutForm from './checkout-form';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -11,13 +12,14 @@ export default class App extends React.Component {
       message: null,
       isLoading: true,
       view: {
-        name: 'catalog',
+        name: 'checkout',
         params: {}
       },
       cart: []
     };
     this.setView = this.setView.bind(this);
     this.addToCart = this.addToCart.bind(this);
+    this.placeOrder = this.placeOrder.bind(this);
   }
 
   componentDidMount() {
@@ -72,6 +74,47 @@ export default class App extends React.Component {
       .catch(err => this.setState({ message: err.message }));
   }
 
+  placeOrder(paymentInfo) {
+    if (!paymentInfo || paymentInfo === null) {
+      // eslint-disable-next-line no-console
+      console.log('Cannot process the order because no payment information was supplied');
+      return;
+    }
+
+    const { name, creditCard, shippingAddress } = paymentInfo;
+    if (!name) {
+      // eslint-disable-next-line no-console
+      console.log('A name must be supplied to process the order');
+      return;
+    }
+    if (!creditCard) {
+      // eslint-disable-next-line no-console
+      console.log('A credit card number must be supplied to process the order');
+      return;
+    }
+    if (!shippingAddress) {
+      // eslint-disable-next-line no-console
+      console.log('A shipping address must be supplied to process the order');
+    }
+
+    fetch('/api/orders', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(paymentInfo)
+    })
+      .then(res => res.json())
+      .then(data => this.setState(prevState => {
+        return {
+          ...prevState,
+          view: { name: 'catalog', params: {} },
+          cart: []
+        };
+      }))
+      .catch(err => this.setState({ message: err.message }));
+  }
+
   render() {
 
     let body = null;
@@ -86,6 +129,10 @@ export default class App extends React.Component {
       case 'cart': body = <CartSummary
         cart={this.state.cart}
         setView={this.setView}/>;
+        break;
+      case 'checkout': body = <CheckoutForm
+        setView={this.setView}
+        placeOrder={this.placeOrder}/>;
         break;
     }
     return (

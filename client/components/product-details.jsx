@@ -7,15 +7,20 @@ export default class ProductDetails extends React.Component {
       product: null,
       isLoading: true
     };
-    this.handleClick = this.handleClick.bind(this);
+    this.handleViewClick = this.handleViewClick.bind(this);
+    this.handleCartClick = this.handleCartClick.bind(this);
   }
 
   componentDidMount() {
     this.getProduct(this.props.productId);
   }
 
-  handleClick() {
+  handleViewClick() {
     this.props.setView('catalog', {});
+  }
+
+  handleCartClick() {
+    this.props.addToCart(this.state.product);
   }
 
   getProduct(productId) {
@@ -50,7 +55,7 @@ export default class ProductDetails extends React.Component {
             type="button"
             className="btn btn-link border-0 text-muted text-decoration-none"
             href="#"
-            onClick={this.handleClick}>
+            onClick={this.handleViewClick}>
               &lt; Back to catalog
           </a>
         </div>
@@ -62,9 +67,15 @@ export default class ProductDetails extends React.Component {
           <div className="card-body col-8">
             <h5 className="card-title">{name}</h5>
             <p className="card-text">{shortDescription}</p>
-            <h5 className="card-title">{`$${parseInt(price / 100)}.${price % 100}`}</h5>
-            <p>{longDescription}</p>
+            <h5 className="card-title text-muted">{`$${parseInt(price / 100)}.${price % 100}`}</h5>
+            <a
+              href="#"
+              className="btn btn-primary"
+              onClick={this.handleCartClick}>
+                Add to cart
+            </a>
           </div>
+          <p>{longDescription}</p>
         </div>
       </div>;
   }

@@ -29,7 +29,7 @@ export default class ProductListItem extends React.Component {
         <div className="card-body">
           <h5 className="card-title">{name}</h5>
           <p className="card-text">{shortDescription}</p>
-          <h5 className="card-title">{`$${parseInt(price / 100)}.${price % 100}`}</h5>
+          <h5 className="card-title text-muted">{`$${parseInt(price / 100)}.${price % 100}`}</h5>
         </div>
       </div>
     );

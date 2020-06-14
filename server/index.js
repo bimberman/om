@@ -126,9 +126,9 @@ app.post('/api/cart', (req, res, next) => {
                                  "p"."image",
                                  "p"."name",
                                  "p"."shortDescription"
-                          from "cartItems" as "c"
-                          join "products" as "p" using ("productId")
-                          where "c"."cartItemId" = $1`;
+                              from "cartItems" as "c"
+                              join "products" as "p" using ("productId")
+                              where "c"."cartItemId" = $1`;
       const insertValues = [insertResult.cartItemId];
       db.query(sqlInsertQuery, insertValues)
         .then(insertResult => {
@@ -142,6 +142,47 @@ app.post('/api/cart', (req, res, next) => {
           });
         })
         .catch(err => next(err));
+    })
+    .catch(err => next(err));
+});
+
+app.post('/api/orders', (req, res, next) => {
+
+  const { name, creditCard, shippingAddress } = req.body;
+  const cartId = req.session.cartId;
+
+  if (!cartId || cartId === null) {
+    next(new ClientError('There is no shopping cart available at this moment', 400));
+    return;
+  }
+
+  if (!name || name === null) {
+    next(new ClientError('Please send a name in the body of your request', 400));
+    return;
+  }
+  if (!creditCard || creditCard === null) {
+    next(new ClientError('Please send a credit card number in the body of your request', 400));
+    return;
+  }
+  if (!shippingAddress || shippingAddress === null) {
+    next(new ClientError('Please send a shipping address in the body of your request', 400));
+    return;
+  }
+
+  const sqlInsertQuery = `INSERT INTO "orders" ("cartId", "name", "creditCard", "shippingAddress")
+                          VALUES ($1, $2, $3, $4)
+                          RETURNING "orderId", "createdAt"`;
+  const insertValues = [cartId, name, creditCard, shippingAddress];
+  db.query(sqlInsertQuery, insertValues)
+    .then(insertResult => {
+      req.session.cartId = null;
+      res.status(201).json({
+        orderId: insertResult.rows[0].orderId,
+        createdAt: insertResult.rows[0].createdAt,
+        name: name,
+        creditCard: creditCard,
+        shippingAddress: shippingAddress
+      });
     })
     .catch(err => next(err));
 });

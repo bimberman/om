@@ -1,4 +1,9 @@
-img.img-icon{
+img.catalog-img{
   object-fit: contain;
   height: 70%;
+}
+
+img.cart-img{
+  object-fit: contain;
+  height: 25vh;
 }

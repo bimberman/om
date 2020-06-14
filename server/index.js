@@ -99,7 +99,7 @@ app.post('/api/cart', (req, res, next) => {
         insertValues = [req.session.cartId];
       }
       if (!selectResult.rowCount) {
-        next(new ClientError(`There is no price listed for the item with id: ${productId}`, 400));
+        throw new ClientError(`There is no price listed for the item with id: ${productId}`, 400);
       }
       return db.query(sqlInsertQuery, insertValues)
         .then(insertResult => {
@@ -132,23 +132,13 @@ app.post('/api/cart', (req, res, next) => {
       const insertValues = [insertResult.cartItemId];
       db.query(sqlInsertQuery, insertValues)
         .then(insertResult => {
-          return {
+          return res.status(201).json({
             cartItemId: insertResult.rows[0].cartItemId,
             price: insertResult.rows[0].price,
             productId: insertResult.rows[0].productId,
             image: insertResult.rows[0].image,
             name: insertResult.rows[0].name,
             shortDescription: insertResult.rows[0].shortDescription
-          };
-        })
-        .then(cartItem => {
-          return res.status(201).json({
-            cartItemId: cartItem.cartItemId,
-            price: cartItem.price,
-            productId: cartItem.productId,
-            image: cartItem.image,
-            name: cartItem.name,
-            shortDescription: cartItem.shortDescription
           });
         })
         .catch(err => next(err));

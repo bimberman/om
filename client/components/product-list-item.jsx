@@ -24,7 +24,7 @@ export default class ProductListItem extends React.Component {
         onClick={this.handleClick}>
         <img
           src={image}
-          className="card-img-top img-icon img-thumbnail mt-3"
+          className="card-img-top catalog-img img-thumbnail mt-3"
           alt="..."/>
         <div className="card-body">
           <h5 className="card-title">{name}</h5>

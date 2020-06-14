@@ -5,11 +5,12 @@ export default class CartSummaryItem extends React.Component {
   render() {
     const { image, name, price, shortDescription } = this.props;
     return (
-      <div className="container card col-12 my-3">
+      <div className="container card col-12 my-3"
+        style={{ height: '30vh' }}>
         <div className="row m-2">
           <img
             src={image}
-            className="card-img-left col-4 my-3"
+            className="card-img-left cart-img img-thumbnail col-4 my-3"
             alt="..." />
           <div className="card-body col-8">
             <h5 className="card-title">{name}</h5>

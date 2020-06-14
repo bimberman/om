@@ -25,7 +25,7 @@ app.get('/api/products', (req, res, next) => {
                            "price",
                            "image",
                            "shortDescription"
-                    from "products"`;
+                            from "products"`;
 
   db.query(sqlQuery)
     .then(result => res.json(result.rows))
@@ -33,18 +33,115 @@ app.get('/api/products', (req, res, next) => {
 });
 
 app.get('/api/products/:productId', (req, res, next) => {
+  const { productId } = req.params;
+  if (!productId || isNaN(parseInt(productId)) || productId < 0) {
+    next(new ClientError(`Expected an integer. ${productId} is not a invalid id.`, 400));
+    return;
+  }
+
   const sqlQuery = `select *
                     from "products"
                     where "productId" = $1`;
-  const value = [req.params.productId];
+  const value = [productId];
 
   db.query(sqlQuery, value)
     .then(result => {
       if (!result.rowCount) {
-        next(new ClientError(`There are no records matching id: ${req.params.productId}`, 404));
+        next(new ClientError(`There are no records matching id: ${productId}`, 404));
         return;
       }
       res.json(result.rows[0]);
+    })
+    .catch(err => next(err));
+});
+
+app.get('/api/cart', (req, res, next) => {
+  if (!req.session.cartId || req.session.cartId === null) return res.status(200).json([]);
+  const sqlSelectQuery = `select "c"."cartItemId",
+                              "c"."price",
+                              "p"."productId",
+                              "p"."image",
+                              "p"."name",
+                              "p"."shortDescription"
+                          from "cartItems" as "c"
+                          join "products" as "p" using ("productId")
+                          where "c"."cartId" = $1`;
+  const selectValues = [req.session.cartId];
+  db.query(sqlSelectQuery, selectValues)
+    .then(cartItems => {
+      return res.status(200).json(cartItems.rows);
+    })
+    .catch(err => next(err));
+});
+
+app.post('/api/cart', (req, res, next) => {
+  const productId = parseInt(req.body.productId);
+
+  if (!productId || isNaN(productId) || productId < 0) {
+    next(new ClientError(`Expected a positive integer. ${productId} is not a invalid id.`, 400));
+    return;
+  }
+
+  const sqlSelectQuery = `select "price"
+                          from "products"
+                          where "productId" = $1`;
+  const selectValues = [productId];
+  db.query(sqlSelectQuery, selectValues)
+    .then(selectResult => {
+      let sqlInsertQuery = `insert into "carts" ("cartId", "createdAt")
+                            values (default, default)
+                            returning "cartId"`;
+      let insertValues = [];
+      if (req.session.cartId && req.session.cartId !== null) {
+        sqlInsertQuery = `select "cartId"
+                          from "carts"
+                          where "cartId" = $1`;
+        insertValues = [req.session.cartId];
+      }
+      if (!selectResult.rowCount) {
+        throw new ClientError(`There is no price listed for the item with id: ${productId}`, 400);
+      }
+      return db.query(sqlInsertQuery, insertValues)
+        .then(insertResult => {
+          return { cartId: insertResult.rows[0].cartId, price: selectResult.rows[0].price };
+        })
+        .catch(err => next(err));
+    })
+    .then(cartData => {
+      req.session.cartId = cartData.cartId;
+      const sqlInsertQuery = `insert into "cartItems" ("cartId", "productId", "price")
+                              values ($1, $2, $3)
+                              returning "cartItemId"`;
+      const insertValues = [cartData.cartId, productId, cartData.price];
+      return db.query(sqlInsertQuery, insertValues)
+        .then(insertResult => {
+          return { cartItemId: insertResult.rows[0].cartItemId };
+        })
+        .catch(err => next(err));
+    })
+    .then(insertResult => {
+      const sqlInsertQuery = `select "c"."cartItemId",
+                                 "c"."price",
+                                 "p"."productId",
+                                 "p"."image",
+                                 "p"."name",
+                                 "p"."shortDescription"
+                          from "cartItems" as "c"
+                          join "products" as "p" using ("productId")
+                          where "c"."cartItemId" = $1`;
+      const insertValues = [insertResult.cartItemId];
+      db.query(sqlInsertQuery, insertValues)
+        .then(insertResult => {
+          return res.status(201).json({
+            cartItemId: insertResult.rows[0].cartItemId,
+            price: insertResult.rows[0].price,
+            productId: insertResult.rows[0].productId,
+            image: insertResult.rows[0].image,
+            name: insertResult.rows[0].name,
+            shortDescription: insertResult.rows[0].shortDescription
+          });
+        })
+        .catch(err => next(err));
     })
     .catch(err => next(err));
 });

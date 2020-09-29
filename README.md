@@ -1,2 +1,2 @@
-# wicked-sales-js
+# Geometric Art
 A full stack Node.js and React shopping cart app

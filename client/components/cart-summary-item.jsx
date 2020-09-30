@@ -5,7 +5,7 @@ export default class CartSummaryItem extends React.Component {
   render() {
     const { image, name, price, shortDescription } = this.props;
     return (
-      <div className="container card col-12 my-3"
+      <div className="container-lg card col-12 my-3"
         style={{ height: '30vh' }}>
         <div className="row m-2">
           <img

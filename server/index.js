@@ -160,8 +160,8 @@ app.post('/api/orders', (req, res, next) => {
     next(new ClientError('Please send a name in the body of your request', 400));
     return;
   }
-  if (!creditCard || creditCard === null) {
-    next(new ClientError('Please send a credit card number in the body of your request', 400));
+  if (!creditCard || creditCard === null || isNaN(parseInt(creditCard))) {
+    next(new ClientError('Please send a valid credit card number in the body of your request', 400));
     return;
   }
   if (!shippingAddress || shippingAddress === null) {

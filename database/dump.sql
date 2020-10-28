@@ -229,6 +229,7 @@ ALTER TABLE ONLY public.products ALTER COLUMN "productId" SET DEFAULT nextval('p
 --
 
 COPY public."cartItems" ("cartItemId", "cartId", "productId", price) FROM stdin;
+1	1	3	1275
 \.
 
 
@@ -237,6 +238,7 @@ COPY public."cartItems" ("cartItemId", "cartId", "productId", price) FROM stdin;
 --
 
 COPY public.carts ("cartId", "createdAt") FROM stdin;
+1	2020-10-25 11:05:53.599256-07
 \.
 
 
@@ -253,12 +255,14 @@ COPY public.orders ("orderId", "cartId", name, "creditCard", "shippingAddress", 
 --
 
 COPY public.products ("productId", name, price, image, "shortDescription", "longDescription") FROM stdin;
-5	Spirals	1095	\t/images/spirals.jpg	An image of a spiral building	An image of a spiral building
 1	Mandala	899	\t/images/mandala.jpg	An image of a mandala	An image of a mandala
 2	Deer	999	\t/images/deer.jpg	An image of a deer	A geometric image of a deer
 6	Spiral Cone	1095	\t/images/spiral_cone.jpg	An image of a spiral cone	An image of a spiral cone
 4	Cubes	1095	\t/images/cubes.jpg	An image of several wire frame cubes	An image of several wire frame cubes
 3	Flower Windmill	1275	\t/images/flower_windmill.jpg	An image of a flower windmill	An image of a flower windmill
+7	T1 Travel Bag	1295	/images/bag_triangle_model1.jpg	Triangle travel bag	Trinagle travel bag first model
+8	H1 Travel Bag	1595	/images/bag_hexagonal_model1.jpg	Hexagonal travel bag	Hexagonal travel bag first model
+5	Spirals	1095	\t/images/spirals.jpg	Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi eveniet, placeat non ex rem assumenda architecto! Aut porro autem ducimus illum cumque, voluptatem id harum enim, in omnis nostrum ab.Dolorem error ad labore optio quae distinctio dolorum nobis eius, nihil accusamus mollitia. Debitis voluptates atque repudiandae minima rem, quisquam, sit itaque qui voluptate amet saepe minus, sed expedita eos!	An image of a spiral building
 \.
 
 
@@ -266,28 +270,28 @@ COPY public.products ("productId", name, price, image, "shortDescription", "long
 -- Name: cartItems_cartItemId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."cartItems_cartItemId_seq"', 76, true);
+SELECT pg_catalog.setval('public."cartItems_cartItemId_seq"', 1, true);
 
 
 --
 -- Name: carts_cartId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."carts_cartId_seq"', 40, true);
+SELECT pg_catalog.setval('public."carts_cartId_seq"', 1, true);
 
 
 --
 -- Name: orders_orderId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."orders_orderId_seq"', 9, true);
+SELECT pg_catalog.setval('public."orders_orderId_seq"', 1, false);
 
 
 --
 -- Name: products_productId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."products_productId_seq"', 1, false);
+SELECT pg_catalog.setval('public."products_productId_seq"', 8, true);
 
 
 --

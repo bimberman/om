@@ -51,6 +51,15 @@ export default class CheckoutForm extends React.Component {
 
     return (
       <div className="container">
+        <div className="row">
+          <a
+            type="button"
+            className="back btn btn-link border-0 mb-3 text-muted text-decoration-none"
+            href="#"
+            onClick={this.handleCatalogClick}>
+            &lt; Back to catalog
+          </a>
+        </div>
         <h1 className="">My Cart</h1>
         <form>
           <div className="form-group">
@@ -88,13 +97,6 @@ export default class CheckoutForm extends React.Component {
               value={shippingAddressValue}></textarea>
           </div>
           <div className="row d-flex justify-content-between m-0">
-            <a
-              type="button"
-              className="btn btn-link border-0 text-muted text-decoration-none pl-0"
-              href="#"
-              onClick={this.handleCatalogClick}>
-              &lt; Back to catalog
-            </a>
             <button
               type="button"
               onClick={this.handleSubmitClick}

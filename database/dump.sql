@@ -229,58 +229,7 @@ ALTER TABLE ONLY public.products ALTER COLUMN "productId" SET DEFAULT nextval('p
 --
 
 COPY public."cartItems" ("cartItemId", "cartId", "productId", price) FROM stdin;
-1	11	1	2999
-2	12	1	2999
-3	13	1	2999
-4	14	1	2999
-5	15	1	2999
-6	16	1	2999
-7	17	1	2999
-8	18	1	2999
-9	19	1	2999
-10	20	1	2999
-11	21	1	2999
-12	22	1	2999
-14	23	1	2999
-16	24	1	2999
-18	25	1	2999
-20	26	1	2999
-22	27	1	2999
-24	28	1	2999
-25	28	1	2999
-26	28	1	2999
-27	28	1	2999
-28	28	1	2999
-29	28	1	2999
-30	28	1	2999
-31	28	1	2999
-32	28	1	2999
-33	28	3	2900
-34	28	1	2999
-35	28	3	2900
-36	28	2	2595
-37	28	4	999
-38	28	6	830
-39	28	1	2999
-40	29	1	2999
-41	30	1	2999
-42	30	2	2595
-43	30	2	2595
-44	30	3	2900
-45	30	2	2595
-46	30	3	2900
-47	30	1	2999
-48	30	4	999
-49	30	5	9900
-50	30	2	2595
-51	30	1	2999
-52	30	1	2999
-53	31	1	2999
-54	31	2	2595
-55	31	3	2900
-56	32	1	2999
-57	32	2	2595
-58	32	3	2900
+1	1	3	1275
 \.
 
 
@@ -289,32 +238,7 @@ COPY public."cartItems" ("cartItemId", "cartId", "productId", price) FROM stdin;
 --
 
 COPY public.carts ("cartId", "createdAt") FROM stdin;
-7	2020-06-12 16:41:03.515611-07
-8	2020-06-13 10:55:12.098722-07
-9	2020-06-13 10:56:33.838901-07
-10	2020-06-13 11:00:08.158057-07
-11	2020-06-13 11:00:36.420131-07
-12	2020-06-13 11:00:48.72451-07
-13	2020-06-13 11:02:19.86162-07
-14	2020-06-13 11:05:35.367616-07
-15	2020-06-13 11:13:33.250163-07
-16	2020-06-13 11:15:16.241191-07
-17	2020-06-13 11:15:40.297136-07
-18	2020-06-13 11:15:56.420326-07
-19	2020-06-13 11:19:08.42128-07
-20	2020-06-13 11:20:29.907874-07
-21	2020-06-13 11:28:35.902433-07
-22	2020-06-13 11:30:27.647716-07
-23	2020-06-13 11:41:13.958527-07
-24	2020-06-13 11:49:28.379178-07
-25	2020-06-13 11:51:04.488437-07
-26	2020-06-13 11:51:36.724563-07
-27	2020-06-13 11:54:09.715429-07
-28	2020-06-13 11:55:18.573485-07
-29	2020-06-13 23:45:38.853678-07
-30	2020-06-14 00:28:16.697773-07
-31	2020-06-14 01:25:14.311579-07
-32	2020-06-14 10:43:28.94626-07
+1	2020-10-25 11:05:53.599256-07
 \.
 
 
@@ -331,12 +255,14 @@ COPY public.orders ("orderId", "cartId", name, "creditCard", "shippingAddress", 
 --
 
 COPY public.products ("productId", name, price, image, "shortDescription", "longDescription") FROM stdin;
-1	Shake Weight	2999	/images/shake-weight.jpg	Dynamic Inertia technology ignites muscles in arms, shoulders, and chest.	Lorem ipsum dolor amet fashion axe pour-over jianbing, adaptogen waistcoat tacos master cleanse pitchfork next level. Thundercats pour-over chartreuse 90's. Master cleanse hot chicken ennui offal. Freegan slow-carb offal hell of. Umami polaroid wolf slow-carb next level. Gentrify cardigan seitan, kombucha tacos chambray roof party typewriter man braid. Tote bag lo-fi hell of chia fam hammock\\n.Aesthetic photo booth la croix, vaporware leggings biodiesel man braid tumeric skateboard tousled slow-carb four dollar toast synth pabst pickled. Typewriter church-key chia slow-carb vice gochujang actually. Shoreditch austin woke hot chicken, single-origin coffee ugh affogato four loko green juice. Migas iPhone four dollar toast mustache.
-2	ShamWow	2595	/images/shamwow.jpg	It's like a chamois, towel, and sponge, all in one! Soaks up to 10x it's weight in any liquid!	Lorem ipsum dolor amet fashion axe pour-over jianbing, adaptogen waistcoat tacos master cleanse pitchfork next level. Thundercats pour-over chartreuse 90's. Master cleanse hot chicken ennui offal. Freegan slow-carb offal hell of. Umami polaroid wolf slow-carb next level. Gentrify cardigan seitan, kombucha tacos chambray roof party typewriter man braid. Tote bag lo-fi hell of chia fam hammock\\n.Aesthetic photo booth la croix, vaporware leggings biodiesel man braid tumeric skateboard tousled slow-carb four dollar toast synth pabst pickled. Typewriter church-key chia slow-carb vice gochujang actually. Shoreditch austin woke hot chicken, single-origin coffee ugh affogato four loko green juice. Migas iPhone four dollar toast mustache.
-3	Snuggie	2900	/images/snuggie.jpg	Super-Soft Fleece with pockets! One Size fits all Adults! Keeps you Warm & Your Hands-Free!	Lorem ipsum dolor amet fashion axe pour-over jianbing, adaptogen waistcoat tacos master cleanse pitchfork next level. Thundercats pour-over chartreuse 90's. Master cleanse hot chicken ennui offal. Freegan slow-carb offal hell of. Umami polaroid wolf slow-carb next level. Gentrify cardigan seitan, kombucha tacos chambray roof party typewriter man braid. Tote bag lo-fi hell of chia fam hammock\\n.Aesthetic photo booth la croix, vaporware leggings biodiesel man braid tumeric skateboard tousled slow-carb four dollar toast synth pabst pickled. Typewriter church-key chia slow-carb vice gochujang actually. Shoreditch austin woke hot chicken, single-origin coffee ugh affogato four loko green juice. Migas iPhone four dollar toast mustache.
-4	Wax Vac	999	/images/wax-vac.jpg	Gentle way to remove ear wax. Safe and hygienic. Reduces the risk of painful infections.	Lorem ipsum dolor amet fashion axe pour-over jianbing, adaptogen waistcoat tacos master cleanse pitchfork next level. Thundercats pour-over chartreuse 90's. Master cleanse hot chicken ennui offal. Freegan slow-carb offal hell of. Umami polaroid wolf slow-carb next level. Gentrify cardigan seitan, kombucha tacos chambray roof party typewriter man braid. Tote bag lo-fi hell of chia fam hammock\\n.Aesthetic photo booth la croix, vaporware leggings biodiesel man braid tumeric skateboard tousled slow-carb four dollar toast synth pabst pickled. Typewriter church-key chia slow-carb vice gochujang actually. Shoreditch austin woke hot chicken, single-origin coffee ugh affogato four loko green juice. Migas iPhone four dollar toast mustache.
-5	Ostrich Pillow	9900	/images/ostrich-pillow.jpg	Create your own snugly space in the world and feel-good anywhere with the ultimate cocoon pillow.	Lorem ipsum dolor amet fashion axe pour-over jianbing, adaptogen waistcoat tacos master cleanse pitchfork next level. Thundercats pour-over chartreuse 90's. Master cleanse hot chicken ennui offal. Freegan slow-carb offal hell of. Umami polaroid wolf slow-carb next level. Gentrify cardigan seitan, kombucha tacos chambray roof party typewriter man braid. Tote bag lo-fi hell of chia fam hammock\\n.Aesthetic photo booth la croix, vaporware leggings biodiesel man braid tumeric skateboard tousled slow-carb four dollar toast synth pabst pickled. Typewriter church-key chia slow-carb vice gochujang actually. Shoreditch austin woke hot chicken, single-origin coffee ugh affogato four loko green juice. Migas iPhone four dollar toast mustache.
-6	Tater Mitts	830	/images/tater-mitts.jpg	8 Seconds is all you need with Tater Mitts. Quickly and easily prepare all your favorite potato dishes with Tater Mitts.	Lorem ipsum dolor amet fashion axe pour-over jianbing, adaptogen waistcoat tacos master cleanse pitchfork next level. Thundercats pour-over chartreuse 90's. Master cleanse hot chicken ennui offal. Freegan slow-carb offal hell of. Umami polaroid wolf slow-carb next level. Gentrify cardigan seitan, kombucha tacos chambray roof party typewriter man braid. Tote bag lo-fi hell of chia fam hammock\\n.Aesthetic photo booth la croix, vaporware leggings biodiesel man braid tumeric skateboard tousled slow-carb four dollar toast synth pabst pickled. Typewriter church-key chia slow-carb vice gochujang actually. Shoreditch austin woke hot chicken, single-origin coffee ugh affogato four loko green juice. Migas iPhone four dollar toast mustache.
+1	Mandala	899	\t/images/mandala.jpg	An image of a mandala	An image of a mandala
+2	Deer	999	\t/images/deer.jpg	An image of a deer	A geometric image of a deer
+6	Spiral Cone	1095	\t/images/spiral_cone.jpg	An image of a spiral cone	An image of a spiral cone
+4	Cubes	1095	\t/images/cubes.jpg	An image of several wire frame cubes	An image of several wire frame cubes
+3	Flower Windmill	1275	\t/images/flower_windmill.jpg	An image of a flower windmill	An image of a flower windmill
+7	T1 Travel Bag	1295	/images/bag_triangle_model1.jpg	Triangle travel bag	Trinagle travel bag first model
+8	H1 Travel Bag	1595	/images/bag_hexagonal_model1.jpg	Hexagonal travel bag	Hexagonal travel bag first model
+5	Spirals	1095	\t/images/spirals.jpg	Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi eveniet, placeat non ex rem assumenda architecto! Aut porro autem ducimus illum cumque, voluptatem id harum enim, in omnis nostrum ab.Dolorem error ad labore optio quae distinctio dolorum nobis eius, nihil accusamus mollitia. Debitis voluptates atque repudiandae minima rem, quisquam, sit itaque qui voluptate amet saepe minus, sed expedita eos!	An image of a spiral building
 \.
 
 
@@ -344,14 +270,14 @@ COPY public.products ("productId", name, price, image, "shortDescription", "long
 -- Name: cartItems_cartItemId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."cartItems_cartItemId_seq"', 58, true);
+SELECT pg_catalog.setval('public."cartItems_cartItemId_seq"', 1, true);
 
 
 --
 -- Name: carts_cartId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."carts_cartId_seq"', 32, true);
+SELECT pg_catalog.setval('public."carts_cartId_seq"', 1, true);
 
 
 --
@@ -365,7 +291,7 @@ SELECT pg_catalog.setval('public."orders_orderId_seq"', 1, false);
 -- Name: products_productId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."products_productId_seq"', 1, false);
+SELECT pg_catalog.setval('public."products_productId_seq"', 8, true);
 
 
 --

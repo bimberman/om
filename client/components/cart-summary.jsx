@@ -35,7 +35,7 @@ export default class CartSummary extends React.Component {
         <div className="row">
           <a
             type="button"
-            className="btn btn-link border-0 text-muted text-decoration-none"
+            className="back btn btn-link border-0 mb-3 text-muted text-decoration-none"
             href="#"
             onClick={this.handleCatalogClick}>
             &lt; Back to catalog
@@ -44,7 +44,7 @@ export default class CartSummary extends React.Component {
         <h2>My Cart</h2>
         {cartItems}
         <div className="row d-flex justify-content-between align-items-center m-0">
-          <h2 className="my-3">Item Total: ${totalPrice}</h2>
+          <h2 className="my-3">Item Total: ${totalPrice.toFixed(2)}</h2>
           <button
             type="button"
             className="btn btn-primary border-0 p-0 col-1"

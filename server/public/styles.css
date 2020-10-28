@@ -7,3 +7,11 @@ img.cart-img{
   object-fit: contain;
   height: 25vh;
 }
+
+.product-detail-modal {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.back {
+  font-size: 1.5rem;
+}

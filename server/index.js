@@ -20,12 +20,14 @@ app.get('/api/health-check', (req, res, next) => {
 });
 
 app.get('/api/products', (req, res, next) => {
-  const sqlQuery = `select "productId",
+  const sqlQuery = `SELECT "productId",
                            "name",
                            "price",
                            "image",
-                           "shortDescription"
-                            from "products"`;
+                           "shortDescription",
+                           "longDescription"
+                    FROM "products"
+                    ORDER BY "productId"`;
 
   db.query(sqlQuery)
     .then(result => res.json(result.rows))
@@ -63,6 +65,7 @@ app.get('/api/cart', (req, res, next) => {
                               "p"."image",
                               "p"."name",
                               "p"."shortDescription"
+                              "p"."longDescription"
                           from "cartItems" as "c"
                           join "products" as "p" using ("productId")
                           where "c"."cartId" = $1`;

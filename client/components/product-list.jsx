@@ -1,12 +1,17 @@
 import React from 'react';
 import ProductListItem from './product-list-item';
+import ProductDetailsModal from './product-details-modal';
 
 export default class ProductList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      products: []
+      products: [],
+      detailedProduct: {}
     };
+    this.detailedProduct = {};
+    this.openDetailedModal = this.openDetailedModal.bind(this);
+    this.closeDetailedModal = this.closeDetailedModal.bind(this);
   }
 
   componentDidMount() {
@@ -22,6 +27,14 @@ export default class ProductList extends React.Component {
       });
   }
 
+  openDetailedModal(productId) {
+    this.setState({ detailedProduct: this.state.products.find(product => product.productId === productId) });
+  }
+
+  closeDetailedModal() {
+    this.setState({ detailedProduct: {} });
+  }
+
   render() {
     const productListItems = this.state.products.map((product, index) => {
       return (
@@ -31,14 +44,25 @@ export default class ProductList extends React.Component {
           name={product.name}
           price={product.price}
           shortDescription={product.shortDescription}
+          longDescription={product.longDescription}
           image={product.image}
-          setView={this.props.setView}>
+          openDetailedModal={this.openDetailedModal}>
         </ProductListItem>
       );
     });
+
+    const modal = Object.keys(this.state.detailedProduct).length === 0
+      ? null
+      : <ProductDetailsModal
+        product = {this.state.detailedProduct}
+        showModal = {true}
+        closeDetailedModal={this.closeDetailedModal}
+        addToCart={this.props.addToCart}>
+      </ProductDetailsModal>;
     return (
-      <div className="product-list row d-flex justify-content-center">
+      <div className="product-list row col-10">
         {productListItems}
+        {modal}
       </div>
     );
   }

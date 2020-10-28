@@ -1,7 +1,6 @@
 import React from 'react';
 import Header from './header';
 import ProductList from './product-list';
-import ProductDetails from './product-details';
 import CartSummary from './cart-summary';
 import CheckoutForm from './checkout-form';
 
@@ -12,7 +11,7 @@ export default class App extends React.Component {
       message: null,
       isLoading: true,
       view: {
-        name: 'checkout',
+        name: 'catalog',
         params: {}
       },
       cart: []
@@ -119,26 +118,34 @@ export default class App extends React.Component {
 
     let body = null;
     switch (this.state.view.name) {
-      case 'catalog': body = <ProductList setView={this.setView} />;
+      case 'catalog': body =
+        <ProductList
+          setView={this.setView}
+          productId={this.state.view.params.productId}
+          addToCart={this.addToCart}
+        />;
         break;
-      case 'details': body = <ProductDetails
-        setView={this.setView}
-        productId={this.state.view.params.productId}
-        addToCart={this.addToCart} />;
+      case 'cart': body =
+        <CartSummary
+          cart={this.state.cart}
+          setView={this.setView}
+        />;
         break;
-      case 'cart': body = <CartSummary
-        cart={this.state.cart}
-        setView={this.setView}/>;
-        break;
-      case 'checkout': body = <CheckoutForm
-        setView={this.setView}
-        placeOrder={this.placeOrder}/>;
+      case 'checkout': body =
+        <CheckoutForm
+          setView={this.setView}
+          placeOrder={this.placeOrder}
+        />;
         break;
     }
     return (
       <div className="container-fluid mx-0 px-0">
-        <div className="row d-fled justify-content-center w-100 mx-0 px-0">
-          <Header cartItemCount={this.state.cart.length} setView={this.setView}/>
+        <div className="row">
+          <Header
+            cartItemCount={this.state.cart.length}
+            setView={this.setView}/>
+        </div>
+        <div className="row d-flex justify-content-center mt-4">
           {body}
         </div>
       </div>

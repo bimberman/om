@@ -64,7 +64,7 @@ app.get('/api/cart', (req, res, next) => {
                               "p"."productId",
                               "p"."image",
                               "p"."name",
-                              "p"."shortDescription"
+                              "p"."shortDescription",
                               "p"."longDescription"
                           from "cartItems" as "c"
                           join "products" as "p" using ("productId")
@@ -74,7 +74,9 @@ app.get('/api/cart', (req, res, next) => {
     .then(cartItems => {
       return res.status(200).json(cartItems.rows);
     })
-    .catch(err => next(err));
+    .catch(err => {
+      next(err);
+    });
 });
 
 app.post('/api/cart', (req, res, next) => {

@@ -3,6 +3,7 @@ import Header from './header';
 import ProductList from './product-list';
 import CartSummary from './cart-summary';
 import CheckoutForm from './checkout-form';
+import DisclaimerModal from './disclaimer-modal';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -11,7 +12,7 @@ export default class App extends React.Component {
       message: null,
       isLoading: true,
       view: {
-        name: 'catalog',
+        name: 'disclaimer',
         params: {}
       },
       cart: []
@@ -118,6 +119,11 @@ export default class App extends React.Component {
 
     let body = null;
     switch (this.state.view.name) {
+      case 'disclaimer': body =
+        <DisclaimerModal
+          setView={this.setView}
+        />;
+        break;
       case 'catalog': body =
         <ProductList
           setView={this.setView}

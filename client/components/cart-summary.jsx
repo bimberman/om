@@ -47,7 +47,16 @@ export default class CartSummary extends React.Component {
           <h2 className="my-3">Item Total: ${totalPrice.toFixed(2)}</h2>
           <button
             type="button"
-            className="btn btn-primary border-0 p-0 col-1"
+            className="btn btn-primary border-0 px-3 py-0 d-none d-md-block"
+            style={{ height: 50 }}
+            onClick={this.handleCheckoutClick}>
+            Checkout
+          </button>
+        </div>
+        <div className="row d-flex justify-content-center align-items-center m-0">
+          <button
+            type="button"
+            className="btn btn-primary border-0 p-0 col-4 d-md-none"
             style={{ height: 50 }}
             onClick={this.handleCheckoutClick}>
               Checkout

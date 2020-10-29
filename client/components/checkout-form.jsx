@@ -67,7 +67,7 @@ export default class CheckoutForm extends React.Component {
     const { name: nameValue, creditCard: creditCardValue, shippingAddress: shippingAddressValue } = this.state;
 
     return (
-      <div className="container">
+      <div className="container col-10 mb-5">
         <div className="row">
           <a
             type="button"

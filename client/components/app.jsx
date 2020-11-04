@@ -12,7 +12,7 @@ export default class App extends React.Component {
       message: null,
       isLoading: true,
       view: {
-        name: 'checkout',
+        name: 'cart',
         params: {}
       },
       cart: []
@@ -20,6 +20,7 @@ export default class App extends React.Component {
     this.setView = this.setView.bind(this);
     this.addToCart = this.addToCart.bind(this);
     this.placeOrder = this.placeOrder.bind(this);
+    this.updateItemQuantity = this.updateItemQuantity.bind(this);
   }
 
   componentDidMount() {
@@ -58,19 +59,37 @@ export default class App extends React.Component {
       .catch(err => this.setState({ message: err.message }));
   }
 
-  addToCart(product) {
+  addToCart(product, quantity) {
     fetch('/api/cart', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ productId: product.productId })
+      body: JSON.stringify({ productId: product.productId, quantity: quantity })
     })
       .then(res => res.json())
       .then(data => this.setState(prevState => {
         prevState.cart.push(data);
         return { ...prevState, cart: prevState.cart };
       }))
+      .catch(err => this.setState({ message: err.message }));
+  }
+
+  updateItemQuantity(cartItemId, quantity) {
+    fetch('/api/cart/update-quantity', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ cartItemId: cartItemId, quantity: quantity })
+    })
+      .then(res => res.json())
+      .then(data => {
+        const updatedCart = this.state.cart;
+        const indexToUpdate = this.state.cart.findIndex(item => item.cartItemId === cartItemId);
+        updatedCart[indexToUpdate] = { ...updatedCart[indexToUpdate], quantity: quantity };
+        this.setState({ cart: updatedCart });
+      })
       .catch(err => this.setState({ message: err.message }));
   }
 
@@ -135,6 +154,7 @@ export default class App extends React.Component {
         <CartSummary
           cart={this.state.cart}
           setView={this.setView}
+          updateItemQuantity={this.updateItemQuantity}
         />;
         break;
       case 'checkout': body =

@@ -1,14 +1,19 @@
 import React from 'react';
+import Carousel from './carousel';
 
 export default class ProductDetailsModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       open: false,
-      product: {}
+      product: {},
+      quantity: 1
     };
     this.handleClose = this.handleClose.bind(this);
     this.handleCartClick = this.handleCartClick.bind(this);
+    this.subtractQuantity = this.subtractQuantity.bind(this);
+    this.addQuantity = this.addQuantity.bind(this);
+    this.handleQuantityChange = this.handleQuantityChange.bind(this);
   }
 
   componentDidMount() {
@@ -21,14 +26,26 @@ export default class ProductDetailsModal extends React.Component {
   }
 
   handleCartClick() {
-    this.props.addToCart(this.state.product);
+    this.props.addToCart(this.state.product, this.state.quantity);
     this.handleClose();
+  }
+
+  addQuantity(event) {
+    this.setState({ quantity: this.state.quantity + 1 });
+  }
+
+  handleQuantityChange(event) {
+    if (event.target.value >= 1) { this.setState({ quantity: event.target.value }); }
+  }
+
+  subtractQuantity(event) {
+    if (this.state.quantity > 1) { this.setState({ quantity: this.state.quantity - 1 }); }
   }
 
   render() {
     const display = this.state.open ? 'd-block' : 'd-none';
-    const { name, image, price, longDescription } = this.props.product;
-
+    const { name, imgList, price, longDescription } = this.props.product;
+    const { quantity } = this.state;
     return (
       <div
         className={`product-detail-modal modal ${display}`}
@@ -36,7 +53,7 @@ export default class ProductDetailsModal extends React.Component {
         role="dialog"
         aria-labelledby="detailedModal">
         <div
-          className="modal-dialog modal-dialog-centered modal-lg"
+          className="modal-dialog modal-dialog-centered modal-xl"
           role="document">
           <div className="modal-content">
             <div className="modal-header">
@@ -50,20 +67,67 @@ export default class ProductDetailsModal extends React.Component {
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <div className="modal-body">
-              <div className="container">
-                <div className="row m-2">
-                  <img
-                    src={image}
-                    className="card-img-left col-4 m-0 p-0"
-                    alt="..." />
-                  <div className="d-flex flex-column justify-content-between col-8">
-                    <p>{longDescription}</p>
+            <div className="modal-body d-none d-lg-block"
+              style={{ height: '50vh' }}>
+              <div className="row m-2">
+                <Carousel
+                  imgList={imgList}
+                  width="col-6"
+                  alt="..." />
+                <div className="d-flex flex-column justify-content-between col-6">
+                  <p>{longDescription}</p>
+                  <div>
                     <div className="d-flex justify-content-end align-items-end">
                       <h5 className="text-muted p-0 m-0 mt-auto">
                         {`$${parseInt(price / 100)}.${price % 100}`}
                       </h5>
                     </div>
+                    <div className="d-flex justify-content-between align-items-end">
+                      <form>
+                        <div className="col-auto">
+                          <div className="input-group">
+                            <div className="input-group-prepend">
+                              <button type="button" className="btn minus input-group-text" onClick={this.subtractQuantity}>-</button>
+                            </div>
+                            <input type="text" value={quantity} onChange={this.handleQuantityChange} className="form-control col-3 text-center" id="inlineFormInputGroup" placeholder="1"/>
+                            <div className="input-group-append">
+                              <button type="button" className="btn plus input-group-text" onClick={this.addQuantity}>+</button>
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+                      <h5 className="text-muted p-0 m-0 mt-auto">
+                        {`$${parseInt(price * quantity / 100)}.${price * quantity % 100}`}
+                      </h5>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="modal-body d-lg-none" style={{ height: '60vh' }}>
+              <div className="row m-2">
+                <Carousel
+                  imgList={imgList}
+                  alt="..." />
+                <div className="d-flex flex-column justify-content-between col-12 mt-5">
+                  <p>{longDescription}</p>
+                  <div className="d-flex justify-content-between align-items-end">
+                    <form>
+                      <div className="col-auto">
+                        <div className="input-group">
+                          <div className="input-group-prepend">
+                            <button type="button" className="btn minus input-group-text" onClick={this.subtractQuantity}>-</button>
+                          </div>
+                          <input type="text" value={quantity} onChange={this.handleQuantityChange} className="form-control col-3 text-center" id="inlineFormInputGroup" placeholder="1" />
+                          <div className="input-group-append">
+                            <button type="button" className="btn plus input-group-text" onClick={this.addQuantity}>+</button>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                    <h5 className="text-muted p-0 m-0 mt-auto">
+                      {`$${parseInt(price * quantity / 100)}.${price * quantity % 100}`}
+                    </h5>
                   </div>
                 </div>
               </div>

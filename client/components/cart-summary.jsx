@@ -9,6 +9,10 @@ export default class CartSummary extends React.Component {
     this.handleCheckoutClick = this.handleCheckoutClick.bind(this);
   }
 
+  componentDidMount() {
+    this.setState({ quantity: this.props.quantity });
+  }
+
   handleCatalogClick() {
     this.props.setView('catalog', {});
   }
@@ -17,17 +21,23 @@ export default class CartSummary extends React.Component {
     this.props.setView('checkout', {});
   }
 
+  updateItemQuantity(cartItemId, quantity) {
+    this.props.updateItemQuantity(cartItemId, quantity);
+  }
+
   render() {
     const totalPrice = this.props.cart.reduce((accumulator, item) => {
-
-      return accumulator + item.price / 100;
+      return accumulator + (item.price * item.quantity / 100);
     }, 0);
     const cartItems = this.props.cart.map(item => {
       return <CartSummaryItems
         key={item.cartItemId}
+        cartItemId={item.cartItemId}
         image={item.image}
         name={item.name}
         price={item.price}
+        quantity={item.quantity}
+        updateQuantity = {this.props.updateItemQuantity}
         shortDescription={item.shortDescription}/>;
     });
     return (

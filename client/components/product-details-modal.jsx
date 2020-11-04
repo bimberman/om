@@ -79,7 +79,7 @@ export default class ProductDetailsModal extends React.Component {
                   <div>
                     <div className="d-flex justify-content-end align-items-end">
                       <h5 className="text-muted p-0 m-0 mt-auto">
-                        {`$${parseInt(price / 100)}.${price % 100}`}
+                        {`$${parseInt(price / 100)}.${price % 100} / item`}
                       </h5>
                     </div>
                     <div className="d-flex justify-content-between align-items-end">

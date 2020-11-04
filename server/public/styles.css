@@ -15,3 +15,9 @@ img.cart-img{
 .back {
   font-size: 1.5rem;
 }
+
+.arrow:focus,
+.minus:focus,
+.plus:focus{
+    outline: none;
+}

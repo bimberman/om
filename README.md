@@ -35,12 +35,13 @@ git clone https://github.com/bimberman/om.git
 ```
 cd om
 ```
-4. Make a copy of the .env.example file and name the new file .env
-5. Edit the .env file as appropriate for your setup (for exmaple if port 3000 is used by another program, then use a different port)
+4. Make a copy of the .env.example file, name the new file .env, and edit the file
+    1. Edit the .env file as appropriate for your setup (for exmaple if port 3000 is used by another program, then use a different port) 
+    2. Change the user to dev and password to lfz
 ```
 PORT=3001
 DEV_SERVER_PORT=3000
-DATABASE_URL=postgres://dev:lfz@localhost/om
+DATABASE_URL=postgres://user:pass@localhost/om
 SESSION_SECRET=secret
 SESSION_EXPIRY=28800000
 ```

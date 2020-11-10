@@ -16,6 +16,7 @@ om.benimberman.com
 ![Node.js](https://icongr.am/devicon/nodejs-original-wordmark.svg?size=128&color=currentColor) 
 ![Express.js](https://icongr.am/devicon/express-original-wordmark.svg?size=128&color=currentColor) 
 ![Bootstrap](https://icongr.am/devicon/bootstrap-plain-wordmark.svg?size=128&color=563d7c)
+![AWS](https://icongr.am/devicon/amazonwebservices-original-wordmark.svg?size=128&color=563d7c)
 
 ## Main Features:
 * A scrollable gallery of items

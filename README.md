@@ -4,7 +4,7 @@
 A full stack Node.js and React shopping cart app
 
 ## Live:
-om.benimberman.com
+[om.benimberman.com](om.benimberman.com)
 
 ## Technologies used:
 ![HTML5](https://icongr.am/devicon/html5-original-wordmark.svg?size=128&color=currentColor) 
@@ -19,17 +19,14 @@ om.benimberman.com
 ![AWS](https://icongr.am/devicon/amazonwebservices-original-wordmark.svg?size=128&color=563d7c)
 
 ## Main Features:
-* A scrollable gallery of items
-* A close up view of items
-* Adding items to a cart
-* Viewing the cart items and summary
-* Checkout view
+* User can view a catalog of items for sale
+* User can view the details of an item
+* User can add an item to their cart
+* User can view their cart summary
+* User can place an order
 
 ## Demo:
 ![Live demo](https://raw.githubusercontent.com/bimberman/om/master/live-demo.gif)
-
-## System requirements
-* 
 
 ## Instructions:
 1. Navigate to the desired parent folder using a CLI, clone the repo, and navigate to the folder

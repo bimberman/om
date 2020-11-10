@@ -23,23 +23,27 @@ https://raw.githubusercontent.com/bimberman/om/master/live-demo.gif
 * 
 
 ## Instructions:
-1. Download repo
+1. Navigate to the desired parent folder using a CLI
+```
+cd YOUR-DESIRED-PARENT-FOLDER-PATH
+```
+2. Download repo
 ```
 git clone https://github.com/bimberman/om.git
 ```
-2. Navigate to the folder using a CLI
+3. Navigate to the folder
 ```
-cd YOUR-FOLDER-PATH
+cd om
 ```
-3. Install all dependencies using NPM
+4. Install all dependencies using NPM
 ```
 npm install
 ```
-4. Rebuild the project 
+5. Rebuild the project 
 ```
 npm run build
 ```
-5. Verify the postgresql service is running
+6. Verify the postgresql service is running
 ```
 sudo service postgresql status
 ```
@@ -47,7 +51,11 @@ sudo service postgresql status
   ```
   sudo service postgresql start
   ```
-6. Start the server
+7. Start the server
 ```
 npm run dev
+```
+8. Open a web browser at localhost port 3000
+```
+http://localhost:3000/
 ```

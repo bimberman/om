@@ -44,7 +44,7 @@ npm install
 npm run build
 ```
 6. Verify the postgresql service is running
-  1. Please note that if the postgresql service is not running, then change *status* with *start* in the following command
+    1. Please note that if the postgresql service is not running, then change *status* with *start* in the following command
 ```
 sudo service postgresql status
 ```

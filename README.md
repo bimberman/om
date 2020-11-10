@@ -31,19 +31,13 @@ om.benimberman.com
 * 
 
 ## Instructions:
-1. Navigate to the desired parent folder using a CLI
+1. Navigate to the desired parent folder using a CLI, clone the repo, and navigate to the folder
 ```
 cd YOUR-DESIRED-PARENT-FOLDER-PATH
-```
-2. Download repo
-```
 git clone https://github.com/bimberman/om.git
-```
-3. Navigate to the folder
-```
 cd om
 ```
-4. Make a copy of the .env.example file, name the new file .env, and edit the file
+2. Make a copy of the .env.example file, name the new file .env, and edit the file
     1. Edit the .env file as appropriate for your setup (for exmaple if port 3000 is used by another program, then use a different port) 
     2. Change the user to dev and password to lfz
 ```
@@ -53,24 +47,24 @@ DATABASE_URL=postgres://user:pass@localhost/om
 SESSION_SECRET=secret
 SESSION_EXPIRY=28800000
 ```
-6. Install all dependencies using NPM
+3. Install all of the dependencies
 ```
 npm install
 ```
-7. Rebuild the project 
+4. Rebuild the project 
 ```
 npm run build
 ```
-8. Verify the postgresql service is running
-    1. Please note that if the postgresql service is not running, then change **status** with **start** in the following command
+5. Verify the postgresql service is running
+    1. Please note that if the postgresql service is not running, then change **STATUS** with **START** in the following command
 ```
 sudo service postgresql status
 ```
-9. Start the server
+6. Start the server
 ```
 npm run dev
 ```
-10. Open a web browser at localhost port 3000
+7. Open a web browser at localhost port 3000
 ```
 http://localhost:3000/
 ```

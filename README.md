@@ -4,7 +4,7 @@
 A full stack Node.js and React shopping cart app
 
 ## Live:
-[om.benimberman.com](om.benimberman.com)
+[om.benimberman.com](https://om.benimberman.com)
 
 ## Technologies used:
 ![HTML5](https://icongr.am/devicon/html5-original-wordmark.svg?size=128&color=currentColor) 

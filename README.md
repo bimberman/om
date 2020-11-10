@@ -15,3 +15,12 @@ om.benimberman.com
 ![NPM](https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Npm-logo.svg/200px-Npm-logo.svg.png)
 ![Node.js](https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Node.js_logo.svg/200px-Node.js_logo.svg.png)
 ![Express.js](https://upload.wikimedia.org/wikipedia/commons/6/64/Expressjs.png)
+![Bootstrap](https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Bootstrap_logo.svg/200px-Bootstrap_logo.svg.png)
+
+## Main Features:
+* A scrollable gallery of items
+* A close up view of items
+* Adding items to a cart
+* Viewing the cart items and summary
+* Checkout view
+

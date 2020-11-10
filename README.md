@@ -44,11 +44,11 @@ npm install
 npm run build
 ```
 6. Verify the postgresql service is running
-    1. Please note that if the postgresql service is not running, then change *status* with *start* in the following command
+    1. Please note that if the postgresql service is not running, then change **status** with **start** in the following command
 ```
 sudo service postgresql status
 ```
-7. Copy the .env.example file and name the new file .env
+7. Make a copy of the .env.example file and name the new file .env
 
 8. Edit the .env file as appropriate for your setup (for exmaple if port 3000 is used by another program, then use a different port)
 ```

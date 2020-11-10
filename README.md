@@ -7,17 +7,15 @@ A full stack Node.js and React shopping cart app
 om.benimberman.com
 
 ## Technologies used:
-![HTML5](https://cdn.jsdelivr.net/gh/devicons/devicon@master/devicon.min.css) 
-![CSS3](https://cdn.jsdelivr.net/gh/devicons/devicon@master/devicon.min.css) 
-![JS](https://cdn.jsdelivr.net/gh/devicons/devicon@master/devicon.min.css) 
-![React](https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/200px-React-icon.svg.png) 
-![PostgreSQL](https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Postgresql_elephant.svg/200px-Postgresql_elephant.svg.png) 
-![NPM](https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Npm-logo.svg/200px-Npm-logo.svg.png) 
-![Node.js](https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Node.js_logo.svg/200px-Node.js_logo.svg.png) 
-![Express.js](https://upload.wikimedia.org/wikipedia/commons/6/64/Expressjs.png) 
-![Bootstrap](https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Bootstrap_logo.svg/200px-Bootstrap_logo.svg.png)
-
-<i class="devicon-javascript-plain"></i>
+![HTML5](https://icongr.am/devicon/html5-original-wordmark.svg?size=128&color=currentColor) 
+![CSS3](https://icongr.am/devicon/css3-original-wordmark.svg?size=128&color=currentColor) 
+![JS](https://icongr.am/devicon/javascript-original.svg?size=128&color=currentColor) 
+![React](https://icongr.am/devicon/react-original-wordmark.svg?size=128&color=currentColor) 
+![PostgreSQL](https://icongr.am/devicon/postgresql-original-wordmark.svg?size=128&color=currentColor) 
+![NPM](https://icongr.am/devicon/npm-original-wordmark.svg?size=128&color=currentColor) 
+![Node.js](https://icongr.am/devicon/nodejs-original-wordmark.svg?size=128&color=currentColor) 
+![Express.js](https://icongr.am/devicon/express-original-wordmark.svg?size=128&color=currentColor) 
+![Bootstrap](https://icongr.am/devicon/bootstrap-plain-wordmark.svg?size=128&color=563d7c)
 
 ## Main Features:
 * A scrollable gallery of items

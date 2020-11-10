@@ -16,3 +16,38 @@ om.benimberman.com
 * Viewing the cart items and summary
 * Checkout view
 
+## Demo:
+https://raw.githubusercontent.com/bimberman/om/master/live-demo.gif
+
+## System requirements
+* 
+
+## Instructions:
+1. Download repo
+```
+git clone https://github.com/bimberman/om.git
+```
+2. Navigate to the folder using a CLI
+```
+cd YOUR-FOLDER-PATH
+```
+3. Install all dependencies using NPM
+```
+npm install
+```
+4. Rebuild the project 
+```
+npm run build
+```
+5. Verify the postgresql service is running
+```
+sudo service postgresql status
+```
+  * Start the postgresql service
+  ```
+  sudo service postgresql start
+  ```
+6. Start the server
+```
+npm run dev
+```

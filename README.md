@@ -47,15 +47,25 @@ npm run build
 ```
 sudo service postgresql status
 ```
-  * Start the postgresql service
+  1. Please note that if the postgresql service is not running, then run the following command to start it
   ```
   sudo service postgresql start
   ```
-7. Start the server
+7. Copy the .env.example file and name the new file .env
+
+8. Edit the .env file as appropriate for your setup (for exmaple if port 3000 is used by another program, then use a different port)
+```
+PORT=3001
+DEV_SERVER_PORT=3000
+DATABASE_URL=postgres://dev:lfz@localhost/om
+SESSION_SECRET=secret
+SESSION_EXPIRY=28800000
+```
+9. Start the server
 ```
 npm run dev
 ```
-8. Open a web browser at localhost port 3000
+10. Open a web browser at localhost port 3000
 ```
 http://localhost:3000/
 ```

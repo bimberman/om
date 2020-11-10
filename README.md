@@ -35,28 +35,27 @@ git clone https://github.com/bimberman/om.git
 ```
 cd om
 ```
-4. Install all dependencies using NPM
-```
-npm install
-```
-5. Rebuild the project 
-```
-npm run build
-```
-6. Verify the postgresql service is running
-    1. Please note that if the postgresql service is not running, then change **status** with **start** in the following command
-```
-sudo service postgresql status
-```
-7. Make a copy of the .env.example file and name the new file .env
-
-8. Edit the .env file as appropriate for your setup (for exmaple if port 3000 is used by another program, then use a different port)
+4. Make a copy of the .env.example file and name the new file .env
+5. Edit the .env file as appropriate for your setup (for exmaple if port 3000 is used by another program, then use a different port)
 ```
 PORT=3001
 DEV_SERVER_PORT=3000
 DATABASE_URL=postgres://dev:lfz@localhost/om
 SESSION_SECRET=secret
 SESSION_EXPIRY=28800000
+```
+6. Install all dependencies using NPM
+```
+npm install
+```
+7. Rebuild the project 
+```
+npm run build
+```
+8. Verify the postgresql service is running
+    1. Please note that if the postgresql service is not running, then change **status** with **start** in the following command
+```
+sudo service postgresql status
 ```
 9. Start the server
 ```

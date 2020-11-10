@@ -1,12 +1,9 @@
 # Om
 
-## Description
 A full stack Node.js and React shopping cart app
 
-## Live:
-[om.benimberman.com](https://om.benimberman.com)
+## Technologies used
 
-## Technologies used:
 ![HTML5](https://icongr.am/devicon/html5-original-wordmark.svg?size=128&color=currentColor) 
 ![CSS3](https://icongr.am/devicon/css3-original-wordmark.svg?size=128&color=currentColor) 
 ![JS](https://icongr.am/devicon/javascript-original.svg?size=128&color=currentColor) 
@@ -18,17 +15,31 @@ A full stack Node.js and React shopping cart app
 ![Bootstrap](https://icongr.am/devicon/bootstrap-plain-wordmark.svg?size=128&color=563d7c)
 ![AWS](https://icongr.am/devicon/amazonwebservices-original-wordmark.svg?size=128&color=563d7c)
 
-## Main Features:
+## Live Demo
+
+Try the application live at: [om.benimberman.com](https://om.benimberman.com)
+
+## Features
+
 * User can view a catalog of items for sale
 * User can view the details of an item
 * User can add an item to their cart
 * User can view their cart summary
 * User can place an order
 
-## Demo:
+## Preview
 ![Live demo](https://raw.githubusercontent.com/bimberman/om/master/live-demo.gif)
 
-## Instructions:
+## Development
+
+### System Requirements
+
+- Node.js 10 or higher
+- NPM 6 or higher
+- PostgreSQL 10 or higher
+
+### Getting Started
+
 1. Navigate to the desired parent folder using a CLI, clone the repo, and navigate to the folder
 ```
 cd YOUR-DESIRED-PARENT-FOLDER-PATH

@@ -7,7 +7,7 @@ A full stack Node.js and React shopping cart app
 om.benimberman.com
 
 ## Technologies used:
-![HTML5](https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/HTML5_logo_and_wordmark.svg/320px-HTML5_logo_and_wordmark.svg.png)
+![HTML5](https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/HTML5_logo_and_wordmark.svg/200px-HTML5_logo_and_wordmark.svg.png)
 ![CSS3](https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/CSS3_logo_and_wordmark.svg/200px-CSS3_logo_and_wordmark.svg.png)
 ![JS](https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Javascript-shield.svg/200px-Javascript-shield.svg.png)
 ![React](https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/200px-React-icon.svg.png)

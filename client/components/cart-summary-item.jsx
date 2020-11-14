@@ -30,11 +30,9 @@ export default class CartSummaryItem extends React.Component {
   }
 
   subtractQuantity(event) {
-    if (this.state.quantity > 1) {
-      const newQuantity = this.state.quantity - 1;
-      this.setState({ quantity: newQuantity });
-      this.props.updateQuantity(this.props.cartItemId, newQuantity);
-    }
+    const newQuantity = this.state.quantity - 1;
+    this.setState({ quantity: newQuantity });
+    this.props.updateQuantity(this.props.cartItemId, newQuantity);
   }
 
   render() {

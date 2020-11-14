@@ -21,3 +21,15 @@ img.cart-img{
 .plus:focus{
     outline: none;
 }
+
+.product-card {
+  cursor: pointer;
+}
+
+.product-card {
+  transition: all 0.3s ease;
+}
+
+.product-card:hover{
+  transform: translate(0px, -10px);
+}

@@ -108,6 +108,26 @@ app.post('/api/cart/update-quantity', (req, res, next) => {
     });
 });
 
+app.post('/api/cart/remove-item', (req, res, next) => {
+  const cartItemId = parseInt(req.body.cartItemId);
+
+  if (!cartItemId || isNaN(cartItemId) || cartItemId < 0) {
+    next(new ClientError(`Expected a positive integer. ${cartItemId} is not a invalid id.`, 400));
+    return;
+  }
+
+  const sqlSelectQuery = `DELETE FROM "cartItems"
+                          where "cartItemId" = $1`;
+  const selectValues = [cartItemId];
+  db.query(sqlSelectQuery, selectValues)
+    .then(cartItems => {
+      return res.status(200).json(cartItems.rows);
+    })
+    .catch(err => {
+      next(err);
+    });
+});
+
 app.post('/api/cart', (req, res, next) => {
   const productId = parseInt(req.body.productId);
   const quantity = parseInt(req.body.quantity);

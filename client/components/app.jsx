@@ -76,21 +76,39 @@ export default class App extends React.Component {
   }
 
   updateItemQuantity(cartItemId, quantity) {
-    fetch('/api/cart/update-quantity', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ cartItemId: cartItemId, quantity: quantity })
-    })
-      .then(res => res.json())
-      .then(data => {
-        const updatedCart = this.state.cart;
-        const indexToUpdate = this.state.cart.findIndex(item => item.cartItemId === cartItemId);
-        updatedCart[indexToUpdate] = { ...updatedCart[indexToUpdate], quantity: quantity };
-        this.setState({ cart: updatedCart });
+    if (quantity >= 1) {
+      fetch('/api/cart/update-quantity', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ cartItemId: cartItemId, quantity: quantity })
       })
-      .catch(err => this.setState({ message: err.message }));
+        .then(res => res.json())
+        .then(data => {
+          const updatedCart = this.state.cart;
+          const indexToUpdate = this.state.cart.findIndex(item => item.cartItemId === cartItemId);
+          updatedCart[indexToUpdate] = { ...updatedCart[indexToUpdate], quantity: quantity };
+          this.setState({ cart: updatedCart });
+        })
+        .catch(err => this.setState({ message: err.message }));
+    } else {
+      fetch('/api/cart/remove-item', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ cartItemId: cartItemId })
+      })
+        .then(res => res.json())
+        .then(data => {
+          const updatedCart = this.state.cart;
+          const indexToUpdate = this.state.cart.findIndex(item => item.cartItemId === cartItemId);
+          updatedCart.splice(indexToUpdate, 1);
+          this.setState({ cart: updatedCart });
+        })
+        .catch(err => this.setState({ message: err.message }));
+    }
   }
 
   placeOrder(paymentInfo) {
@@ -166,12 +184,12 @@ export default class App extends React.Component {
     }
     return (
       <div className="container-fluid mx-0 px-0">
-        <div className="row">
+        <div className="row m-0">
           <Header
             cartItemCount={this.state.cart.length}
             setView={this.setView}/>
         </div>
-        <div className="row d-flex justify-content-center mt-4">
+        <div className="row d-flex justify-content-center m-0 mt-4">
           {body}
         </div>
       </div>

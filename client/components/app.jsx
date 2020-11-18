@@ -113,25 +113,20 @@ export default class App extends React.Component {
 
   placeOrder(paymentInfo) {
     if (!paymentInfo || paymentInfo === null) {
-      // eslint-disable-next-line no-console
-      console.log('Cannot process the order because no payment information was supplied');
       return;
     }
 
     const { name, creditCard, shippingAddress } = paymentInfo;
     if (!name) {
-      // eslint-disable-next-line no-console
-      console.log('A name must be supplied to process the order');
       return;
     }
+
     if (!creditCard) {
-      // eslint-disable-next-line no-console
-      console.log('A credit card number must be supplied to process the order');
       return;
     }
+
     if (!shippingAddress) {
-      // eslint-disable-next-line no-console
-      console.log('A shipping address must be supplied to process the order');
+      return;
     }
 
     fetch('/api/orders', {

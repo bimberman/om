@@ -19,6 +19,14 @@ export default class DisclaimerModal extends React.Component {
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
 
+    if (value) {
+      target.classList.add('is-valid');
+      target.classList.remove('is-invalid');
+    } else {
+      target.classList.remove('is-valid');
+      target.classList.add('is-invalid');
+    }
+
     this.setState({
       checked: value
     });
@@ -28,6 +36,8 @@ export default class DisclaimerModal extends React.Component {
     if (this.state.checked) {
       this.setState({ open: false });
       this.props.setView('catalog', {});
+    } else {
+      document.getElementById('checkbox').classList.add('is-invalid');
     }
   }
 
@@ -62,20 +72,26 @@ export default class DisclaimerModal extends React.Component {
             <div className="modal-body">
               <div className="container">
                 <div className="row m-2">
-                  <div className="input-group mb-3">
-                    <div className="input-group-prepend">
-                      <div className="input-group-text">
+                  <form className="needs-validation">
+                    <div className="form-group">
+                      <div className="form-check">
                         <input
-                          type="checkbox"
+                          className="form-check-input"
                           checked={this.state.checked}
                           onChange={this.handleInputChange}
-                          aria-label="Checkbox for following text input"/>
-                      </div>
-                      <div className="border d-flex">
-                        <p className="font-italic p-2 m-0">I acknowledge that this website is used for demonstration purposes only. This site will not sell any commercial product and I will not share any personal information on this site!</p>
+                          type="checkbox"
+                          value=""
+                          id="checkbox"
+                          required />
+                        <label className="form-check-label" htmlFor="checkbox">
+                          I acknowledge that this website is used for demonstration purposes only. This site will not sell any commercial product and I will not share any personal information on this site!
+                        </label>
+                        <div className="invalid-feedback">
+                          You must agree before exploring the site.
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  </form>
                 </div>
               </div>
             </div>

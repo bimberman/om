@@ -22,8 +22,8 @@ export default class CartSummary extends React.Component {
     this.props.setView('checkout', {});
   }
 
-  updateItemQuantity(cartItemId, quantity) {
-    this.props.updateItemQuantity(cartItemId, quantity);
+  updateQuantity(productId, quantity) {
+    this.props.updateQuantity(productId, quantity);
   }
 
   consolidate(cart) {
@@ -46,29 +46,17 @@ export default class CartSummary extends React.Component {
       return accumulator + (item.price * item.quantity / 100);
     }, 0);
 
-    const consolidatedCart = this.consolidate(this.props.cart).map(item => {
-      return { ...item, quantity: 0 };
-    });
-
-    this.props.cart.forEach(item => {
-      for (let itemIndex = 0; itemIndex < consolidatedCart.length; itemIndex++) {
-        if (consolidatedCart[itemIndex].productId === item.productId) {
-          consolidatedCart[itemIndex].quantity += item.quantity;
-        }
-      }
-    });
-
-    const cartItems = consolidatedCart.map(item => {
+    const cartItems = this.props.cart.map(product => {
       return <CartSummaryItems
-        key={item.cartItemId}
-        productId={item.productId}
-        cartItemId={item.cartItemId}
-        image={item.image}
-        name={item.name}
-        price={item.price}
-        quantity={item.quantity}
-        updateQuantity = {this.props.updateItemQuantity}
-        shortDescription={item.shortDescription}/>;
+        key={product.cartItemId}
+        productId={product.productId}
+        cartItemId={product.cartItemId}
+        image={product.image}
+        name={product.name}
+        price={product.price}
+        quantity={product.quantity}
+        updateQuantity = {this.props.updateQuantity}
+        shortDescription={product.shortDescription}/>;
     });
 
     const displayCheckoutButtonMD = cartItems.length ? 'd-none d-md-block' : 'd-none';

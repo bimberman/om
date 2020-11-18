@@ -20,22 +20,11 @@ export default class App extends React.Component {
     this.setView = this.setView.bind(this);
     this.addToCart = this.addToCart.bind(this);
     this.placeOrder = this.placeOrder.bind(this);
-    this.updateItemQuantity = this.updateItemQuantity.bind(this);
+    this.updateQuantity = this.updateQuantity.bind(this);
   }
 
   componentDidMount() {
     this.getCartItems();
-    fetch('/api/health-check')
-      .then(res => res.json())
-      .then(data => this.setState(prevState => {
-        return { ...prevState, message: data.message || data.error };
-      }))
-      .catch(err => this.setState(prevState => {
-        return { ...prevState, message: err.message };
-      }))
-      .finally(() => this.setState(prevState => {
-        return { ...prevState, isLoading: false };
-      }));
   }
 
   setView(name, params) {
@@ -60,36 +49,51 @@ export default class App extends React.Component {
   }
 
   addToCart(product, quantity) {
-    fetch('/api/cart', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ productId: product.productId, quantity: quantity })
-    })
-      .then(res => res.json())
-      .then(data => this.setState(prevState => {
-        prevState.cart.push(data);
-        return { ...prevState, cart: prevState.cart };
-      }))
-      .catch(err => this.setState({ message: err.message }));
+    const { cart } = this.state;
+    const productIds = cart.map(product => {
+      return product.productId;
+    });
+
+    if (productIds.includes(product.productId)) {
+      const pIndex = productIds.indexOf(product.productId);
+      this.updateQuantity(cart[pIndex].productId, quantity + cart[pIndex].quantity);
+    } else {
+      (
+        fetch('/api/cart', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ productId: product.productId, quantity: quantity })
+        })
+          .then(res => res.json())
+          .then(data => this.setState(prevState => {
+            prevState.cart.push(data);
+            return { ...prevState, cart: prevState.cart };
+          }))
+          .catch(err => this.setState({ message: err.message }))
+      );
+    }
   }
 
-  updateItemQuantity(cartItemId, quantity) {
+  updateQuantity(productId, quantity) {
     if (quantity >= 1) {
       fetch('/api/cart/update-quantity', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ cartItemId: cartItemId, quantity: quantity })
+        body: JSON.stringify({ productId: productId, quantity: quantity })
       })
         .then(res => res.json())
         .then(data => {
-          const updatedCart = this.state.cart;
-          const indexToUpdate = this.state.cart.findIndex(item => item.cartItemId === cartItemId);
-          updatedCart[indexToUpdate] = { ...updatedCart[indexToUpdate], quantity: quantity };
-          this.setState({ cart: updatedCart });
+          const cart = this.state.cart;
+          const productIds = cart.map(product => {
+            return product.productId;
+          });
+          const indexToUpdate = productIds.indexOf(productId);
+          cart[indexToUpdate] = { ...cart[indexToUpdate], quantity: quantity };
+          this.setState({ cart: cart });
         })
         .catch(err => this.setState({ message: err.message }));
     } else {
@@ -98,14 +102,17 @@ export default class App extends React.Component {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ cartItemId: cartItemId })
+        body: JSON.stringify({ productId: productId })
       })
         .then(res => res.json())
         .then(data => {
-          const updatedCart = this.state.cart;
-          const indexToUpdate = this.state.cart.findIndex(item => item.cartItemId === cartItemId);
-          updatedCart.splice(indexToUpdate, 1);
-          this.setState({ cart: updatedCart });
+          const cart = this.state.cart;
+          const productIds = cart.map(product => {
+            return product.productId;
+          });
+          const indexToUpdate = productIds.indexOf(productId);
+          cart.splice(indexToUpdate, 1);
+          this.setState({ cart: cart });
         })
         .catch(err => this.setState({ message: err.message }));
     }
@@ -167,7 +174,7 @@ export default class App extends React.Component {
         <CartSummary
           cart={this.state.cart}
           setView={this.setView}
-          updateItemQuantity={this.updateItemQuantity}
+          updateQuantity={this.updateQuantity}
         />;
         break;
       case 'checkout': body =

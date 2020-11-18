@@ -60,7 +60,8 @@ app.get('/api/products/:productId', (req, res, next) => {
 
 app.get('/api/cart', (req, res, next) => {
   if (!req.session.cartId || req.session.cartId === null) return res.status(200).json([]);
-  const sqlSelectQuery = `select "c"."cartItemId",
+  const sqlSelectQuery = `select
+                              "c"."cartItemId",
                               "c"."price",
                               "c"."quantity",
                               "p"."productId",
@@ -82,23 +83,31 @@ app.get('/api/cart', (req, res, next) => {
 });
 
 app.post('/api/cart/update-quantity', (req, res, next) => {
-  const cartItemId = parseInt(req.body.cartItemId);
+  const cartId = req.session.cartId;
+  const productId = parseInt(req.body.productId);
   const quantity = parseInt(req.body.quantity);
 
-  if (!cartItemId || isNaN(cartItemId) || cartItemId < 0) {
-    next(new ClientError(`Expected a positive integer. ${cartItemId} is not a invalid id.`, 400));
+  if (!productId || isNaN(productId) || productId < 0) {
+    next(new ClientError(`Expected a positive integer. ${productId} is not a invalid id.`, 400));
+    return;
+  }
+
+  if (!cartId || isNaN(cartId) || cartId < 0) {
+    next(new ClientError(`Expected a positive integer. ${cartId} is not a invalid id.`, 400));
     return;
   }
 
   if (!quantity || isNaN(quantity) || quantity < 0) {
-    next(new ClientError(`Expected a positive integer. ${quantity} is not a invalid id.`, 400));
+    next(new ClientError(`Expected a positive integer. ${quantity} is not a invalid quantity.`, 400));
     return;
   }
 
   const sqlSelectQuery = `update "cartItems"
-                          SET "quantity" = $2
-                          where "cartItemId" = $1`;
-  const selectValues = [cartItemId, quantity];
+                          SET "quantity" = $3
+                          where "cartId" = $1
+                          and "productId" = $2
+                          returning *`;
+  const selectValues = [cartId, productId, quantity];
   db.query(sqlSelectQuery, selectValues)
     .then(cartItems => {
       return res.status(200).json(cartItems.rows);
@@ -109,16 +118,24 @@ app.post('/api/cart/update-quantity', (req, res, next) => {
 });
 
 app.post('/api/cart/remove-item', (req, res, next) => {
-  const cartItemId = parseInt(req.body.cartItemId);
+  const cartId = req.session.cartId;
+  const productId = parseInt(req.body.productId);
 
-  if (!cartItemId || isNaN(cartItemId) || cartItemId < 0) {
-    next(new ClientError(`Expected a positive integer. ${cartItemId} is not a invalid id.`, 400));
+  if (!productId || isNaN(productId) || productId < 0) {
+    next(new ClientError(`Expected a positive integer. ${productId} is not a invalid id.`, 400));
+    return;
+  }
+
+  if (!cartId || isNaN(cartId) || cartId < 0) {
+    next(new ClientError(`Expected a positive integer. ${cartId} is not a invalid id.`, 400));
     return;
   }
 
   const sqlSelectQuery = `DELETE FROM "cartItems"
-                          where "cartItemId" = $1`;
-  const selectValues = [cartItemId];
+                          where "cartId" = $1
+                          and "productId" = $2
+                          returning *`;
+  const selectValues = [cartId, productId];
   db.query(sqlSelectQuery, selectValues)
     .then(cartItems => {
       return res.status(200).json(cartItems.rows);
@@ -180,7 +197,8 @@ app.post('/api/cart', (req, res, next) => {
         .catch(err => next(err));
     })
     .then(insertResult => {
-      const sqlInsertQuery = `select "c"."cartItemId",
+      const sqlInsertQuery = `select
+                                 "c"."cartItemId",
                                  "c"."price",
                                  "c"."quantity",
                                  "p"."productId",

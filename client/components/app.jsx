@@ -155,7 +155,9 @@ export default class App extends React.Component {
   }
 
   render() {
-
+    const itemCount = this.state.cart.reduce((itemCount, product) => {
+      return itemCount + product.quantity;
+    }, 0);
     let body = null;
     switch (this.state.view.name) {
       case 'disclaimer': body =
@@ -188,7 +190,7 @@ export default class App extends React.Component {
       <div className="container-fluid mx-0 px-0">
         <div className="row m-0">
           <Header
-            cartItemCount={this.state.cart.length}
+            cartItemCount={itemCount}
             setView={this.setView}/>
         </div>
         <div className="row d-flex justify-content-center m-0 mt-4">

@@ -19,20 +19,20 @@ export default class CartSummaryItem extends React.Component {
   addQuantity(event) {
     const newQuantity = this.state.quantity + 1;
     this.setState({ quantity: newQuantity });
-    this.props.updateQuantity(this.props.cartItemId, newQuantity);
+    this.props.updateQuantity(this.props.productId, newQuantity);
   }
 
   handleQuantityChange(event) {
     if (event.target.value >= 1) {
       this.setState({ quantity: event.target.value });
-      this.props.updateQuantity(this.props.cartItemId, event.target.value);
+      this.props.updateQuantity(this.props.productId, event.target.value);
     }
   }
 
   subtractQuantity(event) {
     const newQuantity = this.state.quantity - 1;
     this.setState({ quantity: newQuantity });
-    this.props.updateQuantity(this.props.cartItemId, newQuantity);
+    this.props.updateQuantity(this.props.productId, newQuantity);
   }
 
   render() {

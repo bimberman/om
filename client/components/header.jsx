@@ -19,7 +19,7 @@ export default class Header extends React.Component {
   render() {
     return (
       <div className="w-100 bg-dark py-3 d-flex align-items-center justify-content-between">
-        <a type="button" className="btn d-flex align-items-center" onClick={this.handleCatalogClick}>
+        <a className="btn d-flex align-items-center" onClick={this.handleCatalogClick}>
           <h2 className="text-white text-center ml-5"><i className="fas fa-om"></i> Om</h2>
         </a>
         <button

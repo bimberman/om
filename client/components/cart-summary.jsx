@@ -91,7 +91,7 @@ export default class CartSummary extends React.Component {
         <h2>My Cart</h2>
         {cartItems}
         <div className="row d-flex justify-content-between align-items-center m-0">
-          <h2 className="my-3">Item Total: ${totalPrice.toFixed(2)}</h2>
+          <h4 className="my-3 col-12 col-md-8 text-center text-md-left">Item Total: ${totalPrice.toFixed(2)}</h4>
           {checkoutButtonMD}
         </div>
         <div className="row d-flex justify-content-center align-items-center m-0">

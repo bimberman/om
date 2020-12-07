@@ -51,7 +51,7 @@ export default class CartSummaryItem extends React.Component {
               <h5 className="card-title text-muted">{`$${parseInt(price / 100)}.${price % 100}`}</h5>
               <p className="card-text">{shortDescription}</p>
             </div>
-            <div className="d-flex justify-content-between align-items-end my-2">
+            <div className="d-none d-md-flex justify-content-between align-items-end my-2">
               <form>
                 <div className="col-auto">
                   <div className="input-group">
@@ -65,7 +65,25 @@ export default class CartSummaryItem extends React.Component {
                   </div>
                 </div>
               </form>
-              <h5 className="text-muted p-0 m-0 mt-2">
+              <h5 className="text-muted p-0 m-0 mt-auto">
+                {`$${parseInt(price * quantity / 100)}.${price * quantity % 100}`}
+              </h5>
+            </div>
+            <div className="d-block d-md-none my-2">
+              <form>
+                <div className="col-auto">
+                  <div className="input-group">
+                    <div className="input-group-prepend">
+                      <button type="button" className="btn minus input-group-text" onClick={this.subtractQuantity}>-</button>
+                    </div>
+                    <input type="text" value={quantity} onChange={this.handleQuantityChange} className="form-control col-6 text-center" id="inlineFormInputGroup" placeholder="1" />
+                    <div className="input-group-append">
+                      <button type="button" className="btn plus input-group-text" onClick={this.addQuantity}>+</button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+              <h5 className="text-center text-muted p-0 m-0 mt-4">
                 {`$${parseInt(price * quantity / 100)}.${price * quantity % 100}`}
               </h5>
             </div>

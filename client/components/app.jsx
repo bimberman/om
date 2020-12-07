@@ -12,7 +12,7 @@ export default class App extends React.Component {
       message: null,
       isLoading: true,
       view: {
-        name: 'disclaimer',
+        name: 'catalog',
         params: {}
       },
       cart: []

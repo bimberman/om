@@ -26,7 +26,6 @@ export default class ProductListItem extends React.Component {
           <img
             src={image}
             className="card-img-top catalog-img img-thumbnail mt-3 border-0"
-            style={{ height: '20vh' }}
             alt="..." />
           <div className="card-body">
             <h5 className="card-title">{name}</h5>

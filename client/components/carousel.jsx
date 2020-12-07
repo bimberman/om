@@ -90,7 +90,7 @@ export default class Carousel extends React.Component {
         <div className='row d-flex justify-content-between flex-row main'>
           <button
             name="previous"
-            className="arrow nav-left border-0 bg-white column"
+            className="arrow nav-left border-0 m-0 p-0 col-1 bg-white column"
             onClick={this.handleArrowClick}>
             <i className="fa fa-angle-left"></i>
           </button>
@@ -101,7 +101,7 @@ export default class Carousel extends React.Component {
           />
           <button
             name="next"
-            className="arrow nav-right border-0 bg-white column"
+            className="arrow nav-right col-1 m-0 p-0 border-0 bg-white column"
             onClick={this.handleArrowClick}>
             <i className="fa fa-angle-right"></i>
           </button>

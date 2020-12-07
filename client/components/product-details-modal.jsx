@@ -67,8 +67,7 @@ export default class ProductDetailsModal extends React.Component {
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <div className="modal-body d-none d-lg-block"
-              style={{ height: '50vh' }}>
+            <div className="modal-body d-none d-lg-block">
               <div className="row m-2">
                 <Carousel
                   imgList={imgList}
@@ -104,13 +103,18 @@ export default class ProductDetailsModal extends React.Component {
                 </div>
               </div>
             </div>
-            <div className="modal-body d-lg-none" style={{ height: '60vh' }}>
+            <div className="modal-body d-lg-none">
               <div className="row m-2">
                 <Carousel
                   imgList={imgList}
                   alt="..." />
                 <div className="d-flex flex-column justify-content-between col-12 mt-5">
                   <p>{longDescription}</p>
+                  <div className="d-flex justify-content-end align-items-end">
+                    <h5 className="text-muted p-0 m-0 mt-auto">
+                      {`$${parseInt(price / 100)}.${price % 100} / item`}
+                    </h5>
+                  </div>
                   <div className="d-flex justify-content-between align-items-end">
                     <form>
                       <div className="col-auto">

@@ -106,6 +106,7 @@ export default class ProductDetailsModal extends React.Component {
             <div className="modal-body d-lg-none">
               <div className="row m-2">
                 <Carousel
+                  width="col-12"
                   imgList={imgList}
                   alt="..." />
                 <div className="d-flex flex-column justify-content-between col-12 mt-5">

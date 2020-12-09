@@ -1,15 +1,21 @@
 img.catalog-img{
-  /* object-fit: contain; */
-  /* height: 70%; */
+  width: auto;
+  height: auto;
+}
+
+img.modal-img {
+  height: 100%;
 }
 
 img.cart-img{
   object-fit: contain;
-  height: 25vh;
+  width: auto;
+  height: auto;
 }
 
 .product-detail-modal {
   background-color: rgba(0, 0, 0, 0.4);
+  overflow-y: auto;
 }
 
 .back {

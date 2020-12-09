@@ -79,7 +79,7 @@ export default class Carousel extends React.Component {
         key={index}
         id={index}
         alt="Responsive image"
-        className="card-img-center border col-1 m-0 p-0"
+        className="card-img-center modal-img border col-1 m-0 p-0"
         onClick={this.handleNavClick}
         src={image}
       />
@@ -96,7 +96,7 @@ export default class Carousel extends React.Component {
           </button>
           <img
             alt="Responsive image"
-            className="col-10 m-0 p-0"
+            className="col-10 m-0 p-0 modal-img"
             src={mainImage}
           />
           <button

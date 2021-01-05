@@ -14,6 +14,8 @@ export default class ProductDetailsModal extends React.Component {
     this.subtractQuantity = this.subtractQuantity.bind(this);
     this.addQuantity = this.addQuantity.bind(this);
     this.handleQuantityChange = this.handleQuantityChange.bind(this);
+    this.styleProductDescription = this.styleProductDescription.bind(this);
+    this.styleProductIcons = this.styleProductIcons.bind(this);
   }
 
   componentDidMount() {
@@ -42,9 +44,24 @@ export default class ProductDetailsModal extends React.Component {
     if (this.state.quantity > 1) { this.setState({ quantity: this.state.quantity - 1 }); }
   }
 
+  styleProductDescription(description) {
+    return description.split('\n').map((str, i) => <p key={i}>{str.substring(0, str.length - 2)}</p>);
+  }
+
+  styleProductIcons(iconImgList, iconDescriptions) {
+    const iconDescriptionArray = iconDescriptions.split(',').map(description => description);
+    return iconImgList.split(',').map((icon, i) =>
+      <div key={i} className="d-flex mb-2">
+        <object type="image/svg+xml" data={icon} alt="icon for materials and description" className="icon img-thumbnail">Your browser does not support SVG</object>
+        <span className="ml-2 align-self-center">{iconDescriptionArray[i]}</span>
+      </div>);
+  }
+
   render() {
     const display = this.state.open ? 'd-block' : 'd-none';
-    const { name, imgList, price, longDescription } = this.props.product;
+    const { name, imgList, price } = this.props.product;
+    const longDescription = this.styleProductDescription(this.props.product.longDescription);
+    const iconImg = this.styleProductIcons(this.props.product.iconImg, this.props.product.iconDescription);
     const { quantity } = this.state;
     return (
       <div
@@ -74,7 +91,8 @@ export default class ProductDetailsModal extends React.Component {
                   width="col-6"
                   alt="..." />
                 <div className="d-flex flex-column justify-content-between col-6">
-                  <p>{longDescription}</p>
+                  <div className="mb-3">{longDescription}</div>
+                  <div className="mb-5 ml-5">{iconImg}</div>
                   <div>
                     <div className="d-flex justify-content-end align-items-end">
                       <h5 className="text-muted p-0 m-0 mt-auto">
@@ -110,7 +128,8 @@ export default class ProductDetailsModal extends React.Component {
                   imgList={imgList}
                   alt="..." />
                 <div className="d-flex flex-column justify-content-between col-12 mt-5">
-                  <p>{longDescription}</p>
+                  <div className="mb-3">{longDescription}</div>
+                  <div className="mb-5 ml-5">{iconImg}</div>
                   <div className="d-flex justify-content-end align-items-end">
                     <h5 className="text-muted p-0 m-0 mt-auto">
                       {`$${parseInt(price / 100)}.${price % 100} / item`}

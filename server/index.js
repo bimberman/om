@@ -26,7 +26,9 @@ app.get('/api/products', (req, res, next) => {
                            "image",
                            "imgList",
                            "shortDescription",
-                           "longDescription"
+                           "longDescription",
+                           "iconImg",
+                           "iconDescription"
                     FROM "products"
                     ORDER BY "productId"`;
 

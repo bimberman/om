@@ -14,6 +14,8 @@ export default class ProductDetailsModal extends React.Component {
     this.subtractQuantity = this.subtractQuantity.bind(this);
     this.addQuantity = this.addQuantity.bind(this);
     this.handleQuantityChange = this.handleQuantityChange.bind(this);
+    this.styleProductDescription = this.styleProductDescription.bind(this);
+    this.styleProductIcons = this.styleProductIcons.bind(this);
   }
 
   componentDidMount() {
@@ -42,9 +44,68 @@ export default class ProductDetailsModal extends React.Component {
     if (this.state.quantity > 1) { this.setState({ quantity: this.state.quantity - 1 }); }
   }
 
+  styleProductDescription(description) {
+    return description.split('\n').map((str, i) => <p key={i}>{str.substring(0, str.length - 2)}</p>);
+  }
+
+  styleProductIcons(productIcons) {
+    const icon = { iconImg: '', iconDescription: '' };
+    return productIcons.split(',').map((iconNum, i) => {
+      switch (iconNum) {
+        case '1':
+          icon.iconImg = '/images/icons/canvas-printed.svg';
+          icon.iconDescription = 'Canvas Printed Fabric';
+          break;
+        case '2':
+          icon.iconImg = '/images/icons/conscious-business.svg';
+          icon.iconDescription = 'Made by a Conscious Business';
+          break;
+        case '3':
+          icon.iconImg = '/images/icons/eco-friendly.svg';
+          icon.iconDescription = 'Eco Friendly Design';
+          break;
+        case '4':
+          icon.iconImg = '/images/icons/hand-cut.svg';
+          icon.iconDescription = 'Hand Cut';
+          break;
+        case '5':
+          icon.iconImg = '/images/icons/nylon-lines.svg';
+          icon.iconDescription = 'Nylon Lines';
+          break;
+        case '6':
+          icon.iconImg = '/images/icons/strap-drop.svg';
+          icon.iconDescription = 'Strap Drop';
+          break;
+        case '7':
+          icon.iconImg = '/images/icons/synthetic-fabric.svg';
+          icon.iconDescription = 'Synthetic Fabric';
+          break;
+        case '8':
+          icon.iconImg = '/images/icons/textile.svg';
+          icon.iconDescription = 'Textile';
+          break;
+        case '9':
+          icon.iconImg = '/images/icons/upcycle.svg';
+          icon.iconDescription = 'Upcycled';
+          break;
+        case '10':
+          icon.iconImg = '/images/icons/water-proof.svg';
+          icon.iconDescription = 'Water Proof';
+          break;
+      }
+
+      return <div key={i} className="d-flex mb-2">
+        <object type="image/svg+xml" data={icon.iconImg} alt="icon for materials and description" className="icon img-thumbnail">Your browser does not support SVG</object>
+        <span className="ml-2 align-self-center">{icon.iconDescription}</span>
+      </div>;
+    });
+  }
+
   render() {
     const display = this.state.open ? 'd-block' : 'd-none';
-    const { name, imgList, price, longDescription } = this.props.product;
+    const { name, imgList, price } = this.props.product;
+    const longDescription = this.styleProductDescription(this.props.product.longDescription);
+    const productIcons = this.styleProductIcons(this.props.product.productIcons);
     const { quantity } = this.state;
     return (
       <div
@@ -74,7 +135,8 @@ export default class ProductDetailsModal extends React.Component {
                   width="col-6"
                   alt="..." />
                 <div className="d-flex flex-column justify-content-between col-6">
-                  <p>{longDescription}</p>
+                  <div className="mb-3">{longDescription}</div>
+                  <div className="mb-5 ml-5"><h4>This product features:</h4>{productIcons}</div>
                   <div>
                     <div className="d-flex justify-content-end align-items-end">
                       <h5 className="text-muted p-0 m-0 mt-auto">
@@ -110,7 +172,8 @@ export default class ProductDetailsModal extends React.Component {
                   imgList={imgList}
                   alt="..." />
                 <div className="d-flex flex-column justify-content-between col-12 mt-5">
-                  <p>{longDescription}</p>
+                  <div className="mb-3">{longDescription}</div>
+                  <div className="mb-5 ml-5">{productIcons}</div>
                   <div className="d-flex justify-content-end align-items-end">
                     <h5 className="text-muted p-0 m-0 mt-auto">
                       {`$${parseInt(price / 100)}.${price % 100} / item`}

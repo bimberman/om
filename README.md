@@ -2,7 +2,6 @@
 
 A full stack Node.js and React shopping cart app
 
-
 ## Technologies used
 
 ![HTML5](https://icongr.am/devicon/html5-original-wordmark.svg?size=128&color=currentColor) 
